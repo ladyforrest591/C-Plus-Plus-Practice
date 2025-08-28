@@ -1,0 +1,740 @@
+#include <iostream>
+#include <cmath>
+#include <array>
+#include <vector>
+using namespace std;
+
+// Welcome to C++ Practice! :D
+// I will be commenting things out more these days.
+
+
+// Functions from slides 12-16
+void spam() {
+  std::cout << "SPAM!!! \n";
+  std::cout << "SPAM!!! \n";
+  std::cout << "SPAM!!! \n";
+}
+
+int spam2() {
+  return 42;
+}
+
+// Function from slides 17-18, note that this is different from what the slides say, but it serves the same purpose
+
+void isEven(int number) {
+    if (number % 2 == 0) {
+      std::cout << "Your number, "  << number << ", is  even\n";
+    } else {
+      std::cout << "Your number, "  << number << ", is not even\n";
+    }
+}
+
+// Function from slides 19-20
+
+int u=0;
+
+void printEvenIntegers(int u) {
+  for (int i = 0; i < u; ++i) {
+        if (i % 2 == 0) {
+            std::cout << i << "\n";
+        } else {
+          
+        }
+    }
+}
+
+// Predeclared functions from slides 21-22
+
+void func1();
+void func2();
+
+void func1() {
+  for (int i =0; i < 2; ++i) {
+    func2();
+  }
+}
+
+void func2() {
+  std::cout << "Coolio! I have predeclared funtions! \n";
+}
+
+// Predeclared functions from slides 23-26
+
+int func3(int a=1);
+
+int func3(int a) {
+  std::cout << "Here's your printed stuff: " << a << "\n";
+  return 0;
+}
+
+int func4(int a=1, int b=2) {
+  std::cout << "Here is a good example of predeclaring arguments in functions! Both a and b are declared. A = " << a << ", B = " << b << "! \n";
+  return 0;
+
+  
+}
+
+// When predeclaring arguments, note that if you predeclare an argument, all the arguments that are past that argument must be predefined. For example, if you predeclare a, you HAVE to predeclare b. However, if you predeclare b, you don't have to predeclare a!
+
+// Functions from slides 29-30
+
+// Note the functions are not 100% like the actual functions shown in slides 29-30
+
+float func5(float w, float x = 0);
+
+float func5(float w, float x) {
+  int y=w-x;
+  std::cout << "W - X equals: " << y << "!";
+  
+  return 0;
+}
+
+// Slides 31-32
+
+float distance(float x1, float y1, float x2, float y2) {
+  return std::sqrt((x2-x1) * (x2-x1) + (y2-y1) * (y2-y1));
+}
+
+// Slides 33-40
+
+// This is an array. :
+
+int worseArray[6] = {1,2,3,4,5,6};
+
+// This is a better array. Please don't use the above array.
+
+std::array<int, 6> betterArray= {7,8,9,10,11,12};
+
+// This is a vector
+
+std::vector<int> vector1={13,14,15,16,17,18};
+
+// Slides 41-50
+
+
+int find_largest_index(const std::vector<int>& vec) {
+    int largest = vec[0];
+    int largest_index = 0;
+    for (int i = 0; i < vec.size(); ++i) {
+        if (vec[i] > largest) {
+            largest = vec[i];
+            largest_index = i;
+        }
+    }
+    return largest_index;
+}
+
+void print_vector(const std::vector<int>& vec) {
+  for (auto x : vec) {
+      std::cout << x << " ";
+  }
+  std::cout << std::endl;
+}
+
+std::vector<int> stalin_sort(const std::vector<int>& vec) {
+  std::vector<int> sorted;
+  if (vec.empty()) return sorted; // handle empty input
+
+  // Always keep the first element
+  sorted.push_back(vec[0]);
+
+  // Process the rest
+  for (size_t i = 1; i < vec.size(); i++) {
+      if (vec[i] >= sorted.back()) {
+          sorted.push_back(vec[i]);
+      }
+  }
+  return sorted;
+}
+
+// Slides 98-99 - Tic-Tac-Toe
+
+std::vector <string> ticTacToe= {"E", "E","E","E","E","E","E","E","E",};
+
+void printGrid() {
+  std::cout << "\n";
+  for (int i = 0; i < 9; i++) {
+    std::cout << ticTacToe[i] << "";
+    if (i % 3 == 2 && i !=0) {
+      std::cout << "\n";
+
+    }
+  }   
+}
+
+int player1Input = 0;
+int player2Input = 0;
+void player1() {
+
+  std::cout << "\n Player 1, choose which position you want to choose - 0, 1, 2, 3, 4, 5, 6, 7, or 8. \n";
+  cin >> player1Input;
+  while (ticTacToe[player1Input] == "O" || ticTacToe[player1Input] == "X" || player1Input >= 9) {
+    std::cout << "\n Already chosen! Player 1, choose which position you want to choose - 0, 1, 2, 3, 4, 5, 6, 7, or 8. \n";
+    cin >> player1Input;
+  }
+  ticTacToe[player1Input] = "X";
+}
+
+void player2() {
+
+  std::cout << "\n Player 2, choose which position you want to choose - 0, 1, 2, 3, 4, 5, 6, 7, or 8. \n";
+  cin >> player2Input;
+  while (ticTacToe[player2Input] == "O" || ticTacToe[player2Input] == "X"|| player1Input >= 8) {
+    std::cout << "\n Already chosen! Player 2, choose which position you want to choose - 0, 1, 2, 3, 4, 5, 6, 7, or 8. \n";
+    cin >> player2Input;
+  }
+  ticTacToe[player2Input] = "O";
+}
+
+
+
+int main() {
+  // Slide 1-3
+
+  // Two ways of printing in C++. The slideshow says that we should print using the second way, I like to print using the first way.
+  std::cout << "Hello World!\n";
+  std::cout << "Hello World!" << std::endl;
+  std::cout << "\n";
+
+  // Slide 4-7
+
+  // Initalizing all types of variables. Note if you want to, you can use an auto variable if you are too lazy to use an int, char, float, double, string or bool.
+  int a=42;
+  char b='C';
+  float c=3.14;
+  double d=1.234567890;
+  std::string e="I love you!";
+  bool f=true;
+
+  // Printing variables
+  std::cout << "Variable A is: " << a << "\n";
+  std::cout << "Variable B is: " << b << "\n";
+  std::cout << "Variable C is: " << c << "\n";
+  std::cout << "Variable D is: " << d << "\n";
+  std::cout << "Variable E is: " << e << "\n";
+  std::cout << "Variable F is: " << f << "\n";
+
+  // Arithmetic Operators start
+  int g=3;
+  int h=10;
+  std::cout << "\n";
+  std::cout << "Here are examples of arithmetic operators. G=3, H=10.\n";
+  std::cout << "G + H equals: " << g+h << "\n";
+  std::cout << "G - H equals: " << g-h << "\n";
+  std::cout << "G * H equals: " << g*h << "\n";
+  std::cout << "G / H equals: " << g/h << "\n";
+  std::cout << "G % H equals: " << g%h << "\n";
+
+  // Here is some examples of i++, ++i, i-- and --i:
+
+  //int i = 5;
+  //int x = ++i   // i becomes 6, x gets 6
+  //int x = i++   // x gets 5, then i becomes 6
+  //int x = i–     // x gets 5, then i becomes 4
+  //int x = –i     // i becomes 4, then x gets 4
+
+
+  std::cout << "\n";
+  std::cout << "Here are examples of relational operators. As said before, G=3, H=10.\n";
+  std::cout << "Note that the next printed lines will either have 0 or 1. 0 means False, 1 means True. \n";
+  std::cout << "\n";
+
+  // Note: There is probably a better way to do this, there is probably a way to optimize this.
+  bool i=g>h;
+  bool j=g<h;
+  bool k=g>=h;
+  bool l=g<=h;
+  bool m=g==h;
+  bool n=g!=h;
+  
+  std::cout << "G > H is: " << i << "\n";
+  std::cout << "G < H is: " << j << "\n";
+  std::cout << "G >= H is: " << k << "\n";
+  std::cout << "G <= H is: " << l << "\n";
+  std::cout << "G == H is: " << m << "\n";
+  std::cout << "G != H is: " << n << "\n";
+
+  std::cout << "\n";
+  std::cout << "Here are examples of logical operators. As said before, G=3, H=10.\n";
+  std::cout << "Note that the next printed lines will either have 0 or 1. 0 means False, 1 means True. \n";
+  std::cout << "\n";
+
+
+  // Note: You must use parenthesis when using logical operators.
+  bool o=(g>h && g<h);
+  bool pp=(g>=h || g<=h);
+  bool q=!(g==h);
+  
+  std::cout << "G > H AND G < H is: " << o << "\n";
+  std::cout << "G <= H OR G >= H is: " << pp << "\n";
+  std::cout << "G == H is NOT: " << q << "\n";
+  
+
+  //Slide 8
+
+  std::cout << "\n";
+  std::cout << "Here is an example of conditionals! This folows an if-elif-else structure.\n";
+  std::cout << "You will be inputting values for variables R and S. Please input an INTEGER.\n";
+  std::cout << "\n";
+
+  int r;
+  int s;
+  
+  std::cout << "Enter variable R: \n";
+  cin >> r;
+  std::cout << "Enter variable S: \n";
+  cin >> s;
+  
+  std::cout << "You entered for R: " << r << "\n";
+  std::cout << "You entered for S: " << s << "\n";
+
+  if (r>s) {
+    std::cout << "R is greater than S";
+  } else if (r<s) {
+    std::cout << "S is greater than R";
+  } else {
+    std::cout << "S is equal to R";
+  }
+
+  std::cout << "\n";
+  std::cout << "\n";
+
+  // Slides 9-11
+
+  std::cout << "Here are examples of lops. The first example is a while loop, the second is a for loop and the third is exiting/skipping iterations of a loop.\n";
+
+  int t=3;
+
+  std::cout << "\n";
+
+  std::cout << "Here is the while loop. \n";
+  std::cout << "\n";
+  
+  while (t<6) {
+    t+=1;
+    std::cout << "T is currently: " << t << "\n";
+  }
+
+  std::cout << "\n";
+  std::cout << "Here is the for loop. \n";
+  std::cout << "\n";
+
+  for (int i=0; i < 3; ++i) {
+    std::cout << "COOLIO! \n";
+  }
+
+  std::cout << "\n";
+
+  std::cout << "I am too lazy to include something with continue and break. But use continue; when you need to skip this iteration and use break; to exit the loop early.\n";
+  std::cout << "\n";
+
+  // Slides 12-16
+
+  // Functions used in this section are written at the top of this code.
+
+  std::cout << "The next functions will be void functions and functions that return stuff.";
+  std::cout << "\n";
+  std::cout << "\n";
+  spam();
+  std::cout << "\n";
+
+  int result = spam2();
+  std::cout << "Spam2's result is: " << result << "\n";
+  
+  // Slides 17-18
+
+  // The function used in this section is written at the top of the code
+
+  int number=0;
+  
+  std::cout << "Enter a random integer: \n";
+  cin >> number;
+
+  isEven(number);
+
+  // Slides 19-20
+  
+  // The function used in this section is written at the top of the code
+
+  
+  std::cout << "Enter another random integer: \n";
+  cin >> u;
+  std::cout << "\n";
+
+  printEvenIntegers(u);
+
+  // Slides 21-22
+
+  // Predeclared functions are found at the top of the code
+  
+  std::cout << "\n";
+  func1();
+
+  // Slides 23-26
+
+  // Predeclared functions are found at the top of the code
+
+  func3();
+  int v=0;
+  std::cout << "\n";
+  std::cout << "Enter another random integer: \n";
+  cin >> v;
+  std::cout << "\n";
+  func3(v);
+  std::cout << "\n";
+  func4();
+
+  // Slides 27-28 are not gone over because they go over concepts similar to slides 23-26.
+
+  // Slides 29-30
+
+  // Functions used in this section are found at top
+  std::cout << "\n";
+  int w=0;
+  int x=0;
+  
+  std::cout << "Enter another random integer: \n";
+  cin >> w;
+  std::cout << "\n";
+  std::cout << "Enter another random integer: \n";
+  cin >> x;
+  std::cout << "\n";
+  func5(w,x);
+
+  std::cout << "\n";
+
+  
+
+  // Slides 31-32
+
+  // Functions used in this section are found at top
+
+  int distance1=0;
+  int distance2=0;
+  int distance3=0;
+  int distance4=0;
+
+  std::cout << "Enter another random integer: \n";
+  cin >> distance1;
+  std::cout << "\n";
+  std::cout << "Enter another random integer: \n";
+  cin >> distance2;
+  std::cout << "\n";
+  std::cout << "Enter another random integer: \n";
+  cin >> distance3;
+  std::cout << "\n";
+  std::cout << "Enter another random integer: \n";
+  cin >> distance4;
+  std::cout << "\n";
+
+  // Below is how you get a variable of the return of a function!
+  
+  int distanceFunctionResult = distance(distance1, distance2, distance3, distance4);
+
+  
+
+  std::cout << "The distance formula has been used! Your answer is: " << distanceFunctionResult << "! \n \n";
+
+  // Slides 33-40
+
+  // Arrays, lists and vectors will be shown at top of code
+
+  // This code is for ARRAYS
+
+  std::cout << "This is how you print a BETTER ARRAY \n";
+  for (int element : betterArray) {
+    std::cout << element << "\n";
+  }
+  std::cout << std::endl;
+
+  std::cout << "This is how you print specific elements from a BETTER ARRAY";
+  std::cout << "\n";
+  std::cout << "Here is the first element from a better array: " << betterArray[0];
+  std::cout << "\n";
+  std::cout << "\n";
+
+  int changeBetterArray = 0;
+  std::cout << "Here I change the first element from a better array from 7 to what you want to change it to: ";
+  cin >> changeBetterArray;
+
+  std::cout << "\n";
+
+  betterArray[0] = changeBetterArray;
+
+  std::cout << "Here is the first element from a better array that has been updated: " << betterArray[0];
+  std::cout << "\n";
+
+  int betterArraySize = betterArray.size();
+  std::cout << "Array size: " << betterArraySize << "\n";
+
+  int betterArrayFirstElement = betterArray.front();
+  std::cout << "Array First Element: " << betterArrayFirstElement << "\n";
+  int betterArrayLastElement = betterArray.back();
+  std::cout << "Array Last Element: " << betterArrayLastElement << "\n";
+
+  // I don't want to do vec.start and vec.end, I'll look at that later :D
+
+  // This code is for VECTORS
+
+  std::cout << "This is how you print a vector \n";
+  for (int element : vector1) {
+    std::cout << element << "\n";
+  }
+  std::cout << std::endl;
+
+  std::cout << "This is how you print specific elements from a vector";
+  std::cout << "\n";
+  std::cout << "Here is the first element from a vector: " << vector1[0];
+  std::cout << "\n";
+
+  // Note I will not be doing how to update elements in a vector/how to get the first and last elements of a vector because it is the same as getting it from an array. Code can be show up top.
+
+  int vectorLastElement = 0;
+  
+  vector1.push_back(10);
+  vectorLastElement= vector1.back();
+  std::cout << "Vector Last Element (note it has been changed to 10): " << vectorLastElement << "\n";
+
+  vectorLastElement = vector1.back();
+
+  vector1.emplace_back(25);
+  std::cout << "Vector Last Element (note it has been changed to 25): " << vectorLastElement << "\n";
+
+  // Emplace back is a little different than push back.
+
+  vector1.pop_back();
+  vectorLastElement= vector1.back();
+  std::cout << "Vector Last Element (note it has been changed to 10): " << vectorLastElement << "\n";
+
+  vector1.resize(int (9));
+  int vectorSize = vector1.size();
+  std::cout << "Vector Size: " << vectorSize << "\n";
+
+  vector1.reserve(int(13));
+  // Note this just reserves number of elements, in this case, since original size was 9 elements and now it is 13, there are four open spots. however, this will not be mentioned in the vector's size.
+
+  vector1.erase(vector1.begin() + 1);
+  std::cout << "\n";
+  std::cout << "Here is the second element from a vector: " << vector1[1];
+
+  std::cout << "\n";
+
+  std::cout << "Just for my own sanity, imma reprint the vector.\n";
+  for (int element : vector1) {
+    std::cout << element << "\n";
+  }
+  std::cout << std::endl;
+
+  // Will do erase and insert later!
+
+  std::cout << "";
+
+  std::cout << "Just for my own sanity, imma reprint the vector.\n";
+  for (int element : vector1) {
+    std::cout << element << "\n";
+  }
+  std::cout << std::endl;
+    
+
+  int empty = 0; 
+  std::cout << "Do you want to empty your vector? Type 1 for yes, type anything else for no \n";
+  cin >> empty;
+
+  if (empty == 1) {
+    vector1.clear();
+  }
+
+  if (vector1.empty()) {
+    std::cout << "Vector is empty! \n";
+  } else {
+    std::cout << "Vector is not empty! \n";    
+  }
+
+  std::cout << "\n";
+
+  // Slides 41-50
+
+  // Functions used in this will be found at top, note most of the things that are gone over in this slide can be found in slides 33-40
+
+  std::vector<int>vector2={1,2,3,4,5,6};
+
+  print_vector(vector2);
+
+  int largestIndex = find_largest_index(vector2);
+  std::cout << "\n";
+
+  std::cout << "Here is your index for the largest element in vector2: " << largestIndex << "!\n";
+  std::cout << "\n";
+
+  // Next, I will be using Solution 2 for the Stalin Sort.
+
+  std::vector<int> vector3 = {5, 2, 3, 4, 1, 6};
+
+  std::cout << "Original vector: ";
+  print_vector(vector3);
+
+  std::vector<int> stalinSort = stalin_sort(vector3);
+
+  std::cout << "Stalin-sorted vector: ";
+  print_vector(stalinSort);
+
+  // Slides 51-66
+
+  class Motor {
+  public:
+      // public attributes
+      float position;
+      float voltage;
+      int direction;
+      float gear_ratio;
+
+      // constructor
+      Motor(int port, int direction, float gear_ratio);
+
+      // public methods
+      void spin(int direction, float voltage);
+      void stop();
+      float get_velocity();
+  private:
+      // private attributes
+      float previous_position;
+      int port;
+  }; // Note: You must use the semicolon
+
+  // Here is the class that we will be using
+
+  class Point {
+  public:
+      float x = 5.0f;
+      float y = 23.0f;
+
+      // Methods used
+
+      void classMethod() {
+        this->x = 1.0f;
+      }
+
+
+  };
+
+  Point p;
+  std::cout << "\n";
+  std::cout << "x = " << p.x << ", y = " << p.y;
+  std::cout << "\n";
+  p.classMethod(); // MUST INCUDE THE P!!!!!!!!!
+  std::cout << "New x = " << p.x;
+
+  // Slides 67-84 (Not completed)
+
+  // Here is a lesson on public, private and protected. Public = accessible anywhere. Private = accessible only in class. Protected = can only be accessed in derived classes.
+
+  class Point2 {
+  public:
+    int x = 5;
+    int y = 2;
+  
+      void classMethod() {
+        std::cout << "\n";
+        std::cout << "Hello! This is being called from a class? \n";
+      }
+    Point2(int a, int b) {
+      x = a;
+      y = b;
+    }
+  
+  };
+
+  // Slides 85-86
+
+  class ComplexNumber {
+  public:
+      // public members
+      float a; // real part
+      float b; // imaginary part
+
+      // constructor
+      ComplexNumber(float a, float b) : a(a), b(b) {}
+  
+  };
+
+  // I have decided to skip to slide 98-99 to implement Tic-Tac-Toe. Wish me luck, it will look horrible.
+
+  // Functions used in Tic-Tac-Toe will be found at top
+
+  std::cout << "\n";
+  printGrid();
+
+  while (!(
+      (ticTacToe[0] == ticTacToe[1] && ticTacToe[1] == ticTacToe[2] && ticTacToe[1] != "E" && ticTacToe[0] != "E" && ticTacToe[2] != "E") || 
+      (ticTacToe[3] == ticTacToe[4] && ticTacToe[5] == ticTacToe[5] && ticTacToe[3] != "E" && ticTacToe[4] != "E" && ticTacToe[6] != "E") ||
+      (ticTacToe[6] == ticTacToe[8] && ticTacToe[7] == ticTacToe[8] && ticTacToe[7] != "E" && ticTacToe[8] != "E" && ticTacToe[6] != "E") ||
+      (ticTacToe[0] == ticTacToe[3] && ticTacToe[3] == ticTacToe[6] && ticTacToe[0] != "E" && ticTacToe[3] != "E" && ticTacToe[6] != "E") ||
+      (ticTacToe[1] == ticTacToe[4] && ticTacToe[4] == ticTacToe[7] && ticTacToe[1] != "E" && ticTacToe[4] != "E" && ticTacToe[7] != "E") ||
+      (ticTacToe[2] == ticTacToe[5] && ticTacToe[8] == ticTacToe[8] && ticTacToe[2] != "E" && ticTacToe[5] != "E" && ticTacToe[8] != "E") ||
+      (ticTacToe[0] == ticTacToe[4] && ticTacToe[4] == ticTacToe[8] && ticTacToe[0] != "E" && ticTacToe[4] != "E" && ticTacToe[8] != "E") ||
+      (ticTacToe[2] == ticTacToe[4] && ticTacToe[4] == ticTacToe[6] && ticTacToe[2] != "E" && ticTacToe[4] != "E" && ticTacToe[6] != "E")
+    )) {
+    
+    player1();
+    printGrid();
+    if (
+      (ticTacToe[0] == ticTacToe[1] && ticTacToe[1] == ticTacToe[2] && ticTacToe[1] != "E" && ticTacToe[0] != "E" && ticTacToe[2] != "E") || 
+      (ticTacToe[3] == ticTacToe[4] && ticTacToe[5] == ticTacToe[5] && ticTacToe[3] != "E" && ticTacToe[4] != "E" && ticTacToe[6] != "E") ||
+      (ticTacToe[6] == ticTacToe[8] && ticTacToe[7] == ticTacToe[8] && ticTacToe[7] != "E" && ticTacToe[8] != "E" && ticTacToe[6] != "E") ||
+      (ticTacToe[0] == ticTacToe[3] && ticTacToe[3] == ticTacToe[6] && ticTacToe[0] != "E" && ticTacToe[3] != "E" && ticTacToe[6] != "E") ||
+      (ticTacToe[1] == ticTacToe[4] && ticTacToe[4] == ticTacToe[7] && ticTacToe[1] != "E" && ticTacToe[4] != "E" && ticTacToe[7] != "E") ||
+      (ticTacToe[2] == ticTacToe[5] && ticTacToe[8] == ticTacToe[8] && ticTacToe[2] != "E" && ticTacToe[5] != "E" && ticTacToe[8] != "E") ||
+      (ticTacToe[0] == ticTacToe[4] && ticTacToe[4] == ticTacToe[8] && ticTacToe[0] != "E" && ticTacToe[4] != "E" && ticTacToe[8] != "E") ||
+      (ticTacToe[2] == ticTacToe[4] && ticTacToe[4] == ticTacToe[6] && ticTacToe[2] != "E" && ticTacToe[4] != "E" && ticTacToe[6] != "E") || ((ticTacToe[0] != "E") && (ticTacToe[1] != "E") && (ticTacToe[2] != "E") && (ticTacToe[3] != "E") && (ticTacToe[4] != "E") && (ticTacToe[5] != "E") && (ticTacToe[6] != "E") && (ticTacToe[7] != "E") && (ticTacToe[8] != "E")
+        )
+    ) {
+      break;
+      }
+    player2();
+    printGrid();
+    if (
+      (ticTacToe[0] == ticTacToe[1] && ticTacToe[1] == ticTacToe[2] && ticTacToe[1] != "E" && ticTacToe[0] != "E" && ticTacToe[2] != "E") || 
+      (ticTacToe[3] == ticTacToe[4] && ticTacToe[5] == ticTacToe[5] && ticTacToe[3] != "E" && ticTacToe[4] != "E" && ticTacToe[6] != "E") ||
+      (ticTacToe[6] == ticTacToe[8] && ticTacToe[7] == ticTacToe[8] && ticTacToe[7] != "E" && ticTacToe[8] != "E" && ticTacToe[6] != "E") ||
+      (ticTacToe[0] == ticTacToe[3] && ticTacToe[3] == ticTacToe[6] && ticTacToe[0] != "E" && ticTacToe[3] != "E" && ticTacToe[6] != "E") ||
+      (ticTacToe[1] == ticTacToe[4] && ticTacToe[4] == ticTacToe[7] && ticTacToe[1] != "E" && ticTacToe[4] != "E" && ticTacToe[7] != "E") ||
+      (ticTacToe[2] == ticTacToe[5] && ticTacToe[8] == ticTacToe[8] && ticTacToe[2] != "E" && ticTacToe[5] != "E" && ticTacToe[8] != "E") ||
+      (ticTacToe[0] == ticTacToe[4] && ticTacToe[4] == ticTacToe[8] && ticTacToe[0] != "E" && ticTacToe[4] != "E" && ticTacToe[8] != "E") ||
+      (ticTacToe[2] == ticTacToe[4] && ticTacToe[4] == ticTacToe[6] && ticTacToe[2] != "E" && ticTacToe[4] != "E" && ticTacToe[6] != "E") || ((ticTacToe[0] != "E") && (ticTacToe[1] != "E") && (ticTacToe[2] != "E") && (ticTacToe[3] != "E") && (ticTacToe[4] != "E") && (ticTacToe[5] != "E") && (ticTacToe[6] != "E") && (ticTacToe[7] != "E") && (ticTacToe[8] != "E")
+      )) {
+      break;
+      }
+    
+    
+    
+  }
+
+  if (
+    (ticTacToe[1] == ticTacToe[2] && ticTacToe[0] == ticTacToe[2] && ticTacToe[1] == "O") || 
+    (ticTacToe[4] == ticTacToe[5] && ticTacToe[3] == ticTacToe[5] && ticTacToe[4] == "O") ||
+    (ticTacToe[7] == ticTacToe[8] && ticTacToe[6] == ticTacToe[8] && ticTacToe[7] == "O") ||
+    (ticTacToe[0] == ticTacToe[3] && ticTacToe[3] == ticTacToe[6] && ticTacToe[6] == "O") ||
+    (ticTacToe[1] == ticTacToe[4] && ticTacToe[7] == ticTacToe[5] && ticTacToe[5] == "O") ||
+    (ticTacToe[2] == ticTacToe[4] && ticTacToe[8] == ticTacToe[4] && ticTacToe[8] == "O") ||
+    (ticTacToe[0] == ticTacToe[4] && ticTacToe[4] == ticTacToe[8] && ticTacToe[8] == "O") ||
+    (ticTacToe[2] == ticTacToe[4] && ticTacToe[4] == ticTacToe[6] && ticTacToe[2] == "O") 
+      ) {
+    std::cout << "\n Congratulations, Player 2, you won!";
+  } else if (
+      (ticTacToe[1] == ticTacToe[2] && ticTacToe[0] == ticTacToe[2] && ticTacToe[1] == "X") || 
+      (ticTacToe[4] == ticTacToe[5] && ticTacToe[3] == ticTacToe[5] && ticTacToe[4] == "X") ||
+      (ticTacToe[7] == ticTacToe[8] && ticTacToe[6] == ticTacToe[8] && ticTacToe[7] == "X") ||
+      (ticTacToe[0] == ticTacToe[3] && ticTacToe[3] == ticTacToe[6] && ticTacToe[6] == "X") ||
+      (ticTacToe[1] == ticTacToe[4] && ticTacToe[7] == ticTacToe[5] && ticTacToe[5] == "X") ||
+      (ticTacToe[2] == ticTacToe[4] && ticTacToe[8] == ticTacToe[4] && ticTacToe[8] == "X") ||
+      (ticTacToe[0] == ticTacToe[4] && ticTacToe[4] == ticTacToe[8] && ticTacToe[8] == "X") ||
+      (ticTacToe[2] == ticTacToe[4] && ticTacToe[4] == ticTacToe[6] && ticTacToe[2] == "X") 
+    ) {
+      std::cout << "\n Congratulations, Player 1, you won!";
+    } else {
+      std::cout << "\n Y'all tied!!!";
+    }
+    
+
+    
+}
